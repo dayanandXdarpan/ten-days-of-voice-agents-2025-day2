@@ -1,40 +1,62 @@
-## Ten Days of Voice Agents — Day 2
+## Ten Days of Voice Agents — Day 2 (current repo snapshot)
 
-Developer-focused README for the local project. This repo contains a LiveKit-based voice agent (backend) and a Next.js frontend for a voice-driven coffee-ordering demo.
-Please note: secrets that were previously committed have been replaced with placeholders in working files. If any real API keys were exposed earlier you must rotate them in the provider consoles (Deepgram, Google/Gemini, Murf, LiveKit, Discord).
+This repository now consists of only two active packages plus the saved order data:
 
-Getting started (local development)
-1) Copy example env files and populate your keys:
-       - `cd backend` then `Copy-Item .env.example .env.local` and edit `.env.local` with your keys.
-       - `cd ../frontend` then `Copy-Item .env.example .env.local` and edit `.env.local`.
+```
+ten-days-of-voice-agents-2025-day2/
+├── backend/            # Python LiveKit agent + Murf/Deepgram/Gemini pipeline
+├── frontend/           # Next.js 15 UI that connects to the LiveKit agent
+├── orders/             # JSON transcripts saved by the backend tools
+└── README.md           # This file
+```
 
-2) Backend (from repo root):
-       - `cd backend`
-       - `uv sync`
-       - `uv run python src/agent.py dev`
+Anything that was previously in `docs/`, `challenges/`, or other helper folders has been removed locally. If you reintroduce those assets later, remember to update this README again so the structure stays accurate.
 
-3) Frontend (new terminal):
-       - `cd frontend`
-       - `npm install`
-       - `npm run dev`
-       - Open `http://localhost:3000`
-Notes
-- Do NOT commit `.env.local` (already in `.gitignore`).
-- If you see any build artifact directories tracked (e.g. `.venv`, `node_modules`, `.next`), they will be removed from the repo as part of the cleanup.
-- For production, use a proper secrets manager and rotate keys if they were exposed.
+### Environment setup
+Secrets were scrubbed from version control. Create fresh `.env.local` files using the provided examples and rotate any previously exposed API keys (Murf, Deepgram, Google/Gemini, LiveKit, Discord):
 
-Repository layout (important parts)
-- `backend/` — Python LiveKit agent and server orchestration
-- `frontend/` — Next.js app with voice UI
-- `orders/` — saved order JSONs
+```powershell
+cd backend
+Copy-Item .env.example .env.local
+# edit backend/.env.local with valid keys
 
-If you want me to proceed, I will:
-1. Remove tracked build artifacts and virtualenvs (`.venv`, `node_modules`, `.next`, `livekit-server*`) and the `backend/tests` folder.
-2. Commit the cleanup and push to `https://github.com/dayanandXdarpan/ten-days-of-voice-agents-2025-day2` on `main`.
+cd ..\frontend
+Copy-Item .env.example .env.local
+# edit frontend/.env.local with LiveKit URL + credentials
+```
 
-If you prefer a different remote/branch or want tests preserved, tell me before I push.
+### Backend quickstart
+```powershell
+cd backend
+uv sync
+uv run python src/agent.py dev
+```
 
-— Maintainer
+The command above expects a LiveKit server reachable via the `LIVEKIT_URL` you configured. A local LiveKit binary is available under `backend/livekit-server/` if you need to run `livekit-server.exe --dev` yourself.
+
+### Frontend quickstart
+```powershell
+cd frontend
+npm install  # or pnpm install
+npm run dev
+```
+
+Open `http://localhost:3000`, allow microphone access, and you should see the voice agent UI connecting to the backend through the LiveKit room token endpoint (`app/api/connection-details`).
+
+### Operational notes
+- `.env.local`, `.venv`, `node_modules`, `.next`, LiveKit binaries, and other generated assets are intentionally ignored via `.gitignore`. Recreate them locally as needed.
+- `orders/` contains the JSON files produced by `save_order` tool calls. Keep or clear that folder depending on how you demo.
+- If you trim additional folders or add new ones, document them here to avoid confusion for future collaborators.
+
+### Troubleshooting checklist
+| Component | Symptom | Quick check |
+|-----------|---------|-------------|
+| LiveKit server | Backend exits immediately | Ensure `livekit-server.exe --dev` (or your cloud instance) is running and reachable at `LIVEKIT_URL`. |
+| Deepgram / Gemini | 401 or 429 errors | Verify API keys/quotas after rotating secrets. |
+| Frontend dev server | `npm run dev` fails | Delete `frontend/node_modules`, reinstall, and confirm Node 18+ is installed. |
+| Session UI | Order summary missing fields | See `frontend/hooks/useOrderDetails.ts`, which now performs normalization and correction handling. |
+
+Feel free to add deployment instructions or CI badges once the project structure stabilizes again.
 # ☕ Murf's Coffee House - AI Voice Ordering System
 
 🎯 **Day 2 Challenge - PRODUCTION READY** ✅ | Complete Coffee Shop Solution with Real-Time Notifications
