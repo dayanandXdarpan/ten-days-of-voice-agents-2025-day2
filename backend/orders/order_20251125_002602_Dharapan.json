@@ -1,0 +1,21 @@
+{
+  "order_id": "MCC-20251125-602",
+  "timestamp": "2025-11-25T00:26:02.823333",
+  "order_number": 1,
+  "customer": {
+    "name": "Dharapan",
+    "delivery_address": "Patnajong Sun, Bihar, India, 800001",
+    "payment_method": "Cash On Delivery"
+  },
+  "order_details": {
+    "drink_type": "Cappuccino",
+    "size": "medium",
+    "milk": "coconut milk",
+    "extras": [
+      "vanilla syrup"
+    ],
+    "total_price": 6.0
+  },
+  "status": "pending",
+  "notes": "Awaiting owner confirmation"
+}

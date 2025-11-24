@@ -1,0 +1,21 @@
+{
+  "order_id": "MCC-20251125-720",
+  "timestamp": "2025-11-25T00:47:20.380975",
+  "order_number": 1,
+  "customer": {
+    "name": "Darpndarpan",
+    "delivery_address": "New Delhi.Junks.Delhi.India.",
+    "payment_method": "Cash On Delivery"
+  },
+  "order_details": {
+    "drink_type": "Cappuccino",
+    "size": "medium",
+    "milk": "coconut milk",
+    "extras": [
+      "honey"
+    ],
+    "total_price": 5.75
+  },
+  "status": "pending",
+  "notes": "Awaiting owner confirmation"
+}

@@ -1,0 +1,19 @@
+{
+  "order_id": "MCC-20251124-259",
+  "timestamp": "2025-11-24T23:02:59.025540",
+  "order_number": 1,
+  "customer": {
+    "name": "Thenon",
+    "delivery_address": "Patna Junction, Bihar State, India, 800001",
+    "payment_method": "Cash On Delivery"
+  },
+  "order_details": {
+    "drink_type": "Cappuccino",
+    "size": "medium",
+    "milk": "coconut milk",
+    "extras": [],
+    "total_price": 5.5
+  },
+  "status": "pending",
+  "notes": "Awaiting owner confirmation"
+}
